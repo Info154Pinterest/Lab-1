@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -11,9 +7,15 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+            /*-------------------------------------------------------------------------------
+               Function Name   : isAlpha
+               Purpose: Test whether a string consists of all alpha characters
+               Parameters: $text (string)
+               Return Type: 
+            --------------------------------------------------------------------------------*/
             //Create a function to test whether a given string is all alphabetic. The function should return 
             //‘true’ if the string is all alphabetic and ‘false’ if the string contains any non-alphabetic characters. 
-            function is_alphabetic($text){
+            function isAlpha($text){
                 if(ctype_alpha($text)){
                     return TRUE;
                 } else {
@@ -23,10 +25,31 @@ and open the template in the editor.
             
             //Create a function to test whether a given string is a valid number. The function should return 
             //‘true’ if the number is valid and ‘false’ if the number is not valid.
-            function checkForNumber($input){
-                if(is_numeric($input)){
-                    return TRUE;
+            /*-------------------------------------------------------------------------------
+               Function Name   : isItaNumber
+               Purpose: Test whether a string consists of all alpha characters
+               Parameters: 
+               Return Type: 
+            --------------------------------------------------------------------------------*/
+            function isItaNumber($input){
+                $input = (string)$input;
+                $numSection = explode(",", $input);
+                $lastDigits = end($numSection);
+                if(is_numeric($lastDigits)&&strlen($lastDigits)==3){
+                    $count = 0;
+                    foreach ($numSection as $section) {
+                        if(is_numeric($section)){
+                            $count++;
+                        } else {
+
+                        }
+                    if($count == count($numSection))
+                        return TRUE;
+                    }
                 } else {
+                    if (count($numSection)<2 && is_numeric($numSection[0])) {
+                        return TRUE;
+                    }
                     return FALSE;
                 }
             }
@@ -36,13 +59,20 @@ and open the template in the editor.
             //a script that sets a test value, calls the function, and displays the test value and the result 
             //returned by the function.
             $num = 34;
-            $string1 = abcd;
-            $sting2 = dsfgf;
+            $string1 = "abcd";
+            $sting2 = "dsfgf";
+            $num2 = "100,110";
             
-             
-                print_r($num." is ".(string)is_alphabetic($num));
-            
-            
+                print_r("Check for aphabetic<br>");
+                print_r($num." is ".(string)isAlpha($num)." </br>");
+                print_r($string1." is ".(string)isAlpha($string1)." </br>");
+                print_r($sting2." is ".(string)isAlpha($sting2)." </br>");
+
+                print_r("Check for number<br>");
+                print_r($num." is ".(string)isItaNumber($num)." </br>");
+                print_r($string1." is ".(string)isItaNumber($string1)." </br>");
+                print_r($sting2." is ".(string)isItaNumber($sting2)." </br>");
+                print_r($num2." is ".(string)isItaNumber($num2)." </br>");
         ?>
     </body>
 </html>
